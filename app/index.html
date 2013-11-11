@@ -14,50 +14,53 @@
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
     </head>
-    <body>
-        <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+    <body id="swipeBox" class="swiper-container">
+        
+        <div id="randTarget" class="swiper-wrapper">
 
+            <section class="womenswear1 swiper-slide" data-shopurl='http://is.gd/DyMr0y'>
+                <h1>WOMEN'S CLOTHES</h1>
+            </section>
 
-        <div class="container">
-            <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <h3 class="text-muted">bkf dec</h3>
-            </div>
+            <section class="womenswear2 swiper-slide lightsteelblue" data-shopurl='http://is.gd/DyMr0y'>
+                <h1>WOMEN'S CLOTHES #2</h1>
+            </section>
 
-            <div class="jumbotron">
-                <h1>'Allo, 'Allo!</h1>
-                <p class="lead">Always a pleasure scaffolding your apps.</p>
-                <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
-            </div>
+            <section class="womensaccessories swiper-slide blue" data-shopurl='http://is.gd/DyMr0y'>
+                <h1>WOMEN'S ACCESSORIES</h1>
+            </section>
 
-            <div class="row marketing">
-                <div class="col-lg-6">
-                    <h4>HTML5 Boilerplate</h4>
-                    <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
+            <section class="miffy swiper-slide red" data-shopurl='http://is.gd/DyMr0y'>
+                <h1>TOYS</h1>
+            </section>
 
-                    <h4>Bootstrap</h4>
-                    <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
+            <section class="kitchenaid swiper-slide pink" data-shopurl='http://is.gd/DyMr0y'>
+                <h1>KITCHENAID</h1>
+            </section>
 
-
-                </div>
-            </div>
-
-            <div class="footer">
-                <p>♥ from the Yeoman team</p>
-            </div>
+            <section class="train swiper-slide goldenrod" data-shopurl='http://is.gd/DyMr0y'>
+                <h1>FOOD</h1>
+            </section>
 
         </div>
 
+        <button class="btnn shop"><div><span>Bekijk gehele aanbod</span><img src="images/chevrons.png"></div></button>
+
+    
+        <div class="storefront swiper-no-swiping">
+            <div class="closebtn">+</div>
+            <iframe class="swiper-no-swiping" frameborder="none" src="" height="640" width="960" scrolling="yes"></iframe>
+        </div>
+
+
+        <!-- HIDDEN container for image-loading detection -->
+        <div class="imagesloaded visuallyhidden">
+            <img src="images/chevrons.png">
+        </div>
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
-        <script src="bower_components/jquery/jquery.js"></script>
+
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -72,22 +75,21 @@
         </script>
 
         <!-- build:js scripts/main.js -->
+        <script src="scripts/utilities.js"></script>
+        <script src="scripts/vendor/imagesloaded.js"></script>
+        <script src="scripts/vendor/swiper.js"></script>
+        <script src="scripts/vendor/swiper.progress-1.0.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
 
         <!-- build:js scripts/plugins.js -->
-        <script src="bower_components/sass-bootstrap/js/affix.js"></script>
-        <script src="bower_components/sass-bootstrap/js/alert.js"></script>
-        <script src="bower_components/sass-bootstrap/js/dropdown.js"></script>
-        <script src="bower_components/sass-bootstrap/js/tooltip.js"></script>
-        <script src="bower_components/sass-bootstrap/js/modal.js"></script>
-        <script src="bower_components/sass-bootstrap/js/transition.js"></script>
-        <script src="bower_components/sass-bootstrap/js/button.js"></script>
-        <script src="bower_components/sass-bootstrap/js/popover.js"></script>
-        <script src="bower_components/sass-bootstrap/js/carousel.js"></script>
-        <script src="bower_components/sass-bootstrap/js/scrollspy.js"></script>
-        <script src="bower_components/sass-bootstrap/js/collapse.js"></script>
-        <script src="bower_components/sass-bootstrap/js/tab.js"></script>
+
         <!-- endbuild -->
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+               BKF.Global.kickit();
+            });
+        </script>
 </body>
 </html>

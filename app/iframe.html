@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=1024, height=655, target-densitydpi=device-dpi" />
+        <title>Gallery Display</title>
+        <style>
+        html, body {min-height: 100%;}
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #000000;
+            }
+            header {
+                height: 5px;
+                width: 100%;
+                
+            }
+            iframe {
+                width: 1024px;
+                height: 704px;
+                left: 50%;
+                margin-left: -512px;
+                position: relative;
+                background-color: #fff;
+                overflow: hidden;
+            }
+        </style>
+        <script>
+            // Prevent variables from being global      
+            (function () {
+
+                  /*
+                      1. Inject CSS which makes iframe invisible
+                  */
+                
+                var div = document.createElement('div'),
+                    ref = document.getElementsByTagName('base')[0] || 
+                          document.getElementsByTagName('script')[0];
+
+                div.innerHTML = '&shy;<style> iframe { visibility: hidden; } </style>';
+
+                ref.parentNode.insertBefore(div, ref);
+
+                    
+                /*
+                    2. When window loads, remove that CSS, 
+                       making iframe visible again
+                */
+                
+                window.onload = function() {
+                    div.parentNode.removeChild(div);
+                }
+                
+            })();
+        </script>
+    </head>
+    <body>
+        <iframe src="index.html" scrolling="no" frameborder="0"></iframe>
+       
+    </body>
+</html>

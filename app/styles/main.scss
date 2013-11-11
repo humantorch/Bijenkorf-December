@@ -2,90 +2,180 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
 
-.browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
-}
+$black: #000000;
+$white: #ffffff;
 
-/* Space out content a bit */
+$bottom: 20px;
+
+* {-webkit-box-sizing: border-box; -webkit-user-select: none;}
+
 body {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+    opacity: 0;
+    height: 704px !important;
+    width: 1024px !important;
+    margin: 0; padding: 0;
+    background-color: $black;
+    color: $white;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-    padding-left: 15px;
-    padding-right: 15px;
+.swiper-container {
+    // -webkit-perspective: 2500px;
+    // -moz-perspective: 2500px;
+    // -ms-perspective: 2500px;
+    // perspective: 2500px;
 }
 
-/* Custom page header */
-.header {
-    border-bottom: 1px solid #e5e5e5;
+.swiper-wrapper {
+    // -webkit-transform-style: preserve-3d;
+    // -moz-transform-style: preserve-3d;
+    // -ms-transform-style: preserve-3d;
+    // transform-style: preserve-3d;
 }
 
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
+section {
+    @include size(1024px, 704px);
+    -webkit-transform: translate3d(0,0,0);
+    -webkit-perspective: 1000;
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    // display: inline-block;
+    position: relative;
+    float: left;
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-size: 1024px 704px;
+    // -webkit-transform-style: preserve-3d;
+    // -moz-transform-style: preserve-3d;
+    // -ms-transform-style: preserve-3d;
+    // transform-style: preserve-3d;
+    h1 {
+        @extend .visuallyhidden;
+        color: red;
+    }
 }
 
-/* Custom page footer */
-.footer {
-    padding-top: 19px;
-    color: #777;
-    border-top: 1px solid #e5e5e5;
+.womenswear1 {
+    background-image: url(../images/womenswear1.jpg);
 }
 
-.container-narrow > hr {
-    margin: 30px 0;
+.womenswear2 {
+    background-image: url(../images/womenswear2.jpg);
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
+.womensaccessories {
+    background-image: url(../images/womensaccessories.jpg);
+}
+
+.miffy {
+    background-image: url(../images/miffy.jpg);
+}
+
+.kitchenaid {
+    background-image: url(../images/kitchenaid.jpg);
+}
+
+.train {
+    background-image: url(../images/train.jpg);
+}
+
+
+
+
+/* SHOP BUTTON */
+.btnn {
+    // opacity: 0;
+    -webkit-transition: opacity 0.5s ease;
+    background-color: $black;
+    position: fixed;
+    border-radius: 10px;
+    color: $white;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
     text-align: center;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-}
-
-/* Supporting marketing content */
-.marketing {
-    margin: 40px 0;
-}
-
-.marketing p + h4 {
-    margin-top: 28px;
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    .container {
-        max-width: 730px;
+    -webkit-appearance: none;
+    border: none;
+    padding: 0;
+    @include box-shadow(0 2px 9px 1px rgba(0,0,0,0.4));
+    outline: none;
+    &.shop {
+        height: 43px;
+        padding: 0 20px;
+        bottom: $bottom; right: 20px;
+        line-height: 40px;
+        z-index: 10000;
+        div {
+            color: $white;
+            img {
+                @include size(20px, 12px);
+                margin-left: 20px;
+            }
+        }
     }
 
-    /* Remove the padding we set earlier */
-    .header,
-    .marketing,
-    .footer {
-        padding-left: 0;
-        padding-right: 0;
+}
+
+/*STORE IFRAME */
+.storefront {
+    @include size(960px, 640px);
+    position: absolute;
+    left: 50%; margin-left: -480px;
+    top: 50%; margin-top: -320px;
+    // overflow: scroll;
+    -webkit-overflow-scrolling:touch;
+    opacity: 0;
+    -webkit-transition: opacity 0.5s ease;
+    pointer-events: none;
+    background-color: $white;
+    box-shadow: 0 0 15px rgba(0,0,0,1);
+    z-index: 20000;
+    transform: translate(-9999px, 0);
+    & .closebtn {
+        display: block;
+        position: absolute;
+        top: -10px; right: -10px;
+        border-radius: 50%;
+        @include size(21px, 21px);
+        background-color: $black;
+        color: $white;
+        text-align: center;
+        line-height: 13px;
+        font-weight: bold;
+        font-size: 1.5em;
+        -webkit-transform: rotate(45deg);
+        box-shadow: 0 0 5px rgba(255,255,255,1);
     }
-    /* Space out the masthead */
-    .header {
-        margin-bottom: 30px;
-    }
-    /* Remove the bottom border on the jumbotron for visual effect */
-    .jumbotron {
-        border-bottom: 0;
+    &.shown {
+        transform: translate(0, 0);
     }
 }
+
+
+
+
+// non-semantic helper classes
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+.loaded {
+    opacity: 1;
+    -webkit-transition: opacity 1s ease;
+}
+
+.fadeOut {
+    opacity: 0;
+    -webkit-transition: opacity 1.5s ease 6s;
+}
+
+.fadeIn {
+    opacity: 1 !important;
+    -webkit-transition: opacity 0.5s ease;
+    pointer-events: auto !important;
+}
+
+// animations
+@-webkit-keyframes fadeOut { from { opacity:1; } to { opacity:0; } }
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
