@@ -1,5 +1,5 @@
 /*jslint browser: true, devel: true */
-/*global imagesLoaded, Swiper, $, $$, log, createjs*/
+/*global imagesLoaded, Swiper, $, $$, log, PathAnimator*/
 
 var BKF = BKF || {};
 
@@ -140,9 +140,18 @@ BKF.Global = (function (window, document, undefined) {
                 }
             });
 
+
+            /* NIJNTJE ANIMATION */
+            $('.dome').addEventListener(UP, function() {
+				$('.dome').classList.add('nijntjehop');
+				// $('.nijnte').classList.add('nijntjehop');
+				setTimeout(self.nijntjehop,750);
+            });
             
 
             
+
+
 
             function toggleAnimation() {
                 console.log('toggleAnimation');
@@ -213,6 +222,32 @@ BKF.Global = (function (window, document, undefined) {
                 $('#toytrain').classList.remove('toot');
                 $('#backtrain').classList.remove('toot');
             }, 11000);
+        },
+
+        nijntjehop: function() {
+			console.log('nijnthehop start');
+
+			var path = 'M491.725,42.482c0,0-16.55-121.96-140.518-132.759 C103.793-111.828,90.863,467.482,90.863,467.482S79.656,295.069-1.379,295.069s-180.172,155.172-180.172,155.172',
+			    pathAnimator = new PathAnimator( path ),    // initiate a new pathAnimator object
+			    objToAnimate = document.getElementById('nijnte'),    // The object that will move along the path
+			    speed = 3,          // seconds that will take going through the whole path
+			    reverse = false,    // go back of forward along the path
+			    startOffset = 0;    // between 0% to 100%
+			    
+			
+
+			function step( point, angle ){
+			    // do something every "frame" with: point.x, point.y & angle
+			    objToAnimate.style.cssText = 'top:' + point.y + 'px;' +
+			                                'left:' + point.x + 'px;';
+			}
+
+			function finish(){
+				// do something when animation is done
+				console.log('nijntjehop complete');
+			}
+
+			pathAnimator.start( speed, step, reverse, startOffset, finish);
         }
 	};
 

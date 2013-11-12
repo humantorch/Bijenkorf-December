@@ -83,6 +83,35 @@ section {
 
 .miffy {
     background-image: url(#{$images}miffy.jpg);
+    .svgPath {
+        display: none;
+    }
+    .dome-anim {
+        @include size(115px, 156px);
+        background-size: 115px 156px !important;
+        position: absolute;
+        left: 494px;
+        top: 43px;
+        &.dome {
+            background: transparent url(../images/dome-transparent.png) left top no-repeat;
+            z-index: 150;
+            &.nijntjehop {
+                transform: translate(0, -200px);
+                transition: all 1s ease-in;
+            }
+        }
+        &.nijnte {
+            background: transparent url(../images/nintje.png) left top no-repeat;
+            z-index: 100;
+            &.nijntjehop {
+                -webkit-animation: miffyhop 2s 1 0.5s linear; /* easeInOutCubic */
+                -webkit-animation-fill-mode: forwards;
+            }
+        }
+    }
+    .nijntjehop {
+
+    }
     button {
         transform: translate(650px, 328px);
     }
@@ -110,7 +139,7 @@ section {
         background-size: 383px 206px;
         transform: translate(653px, 300px);
         &.toot {
-            -webkit-animation: frontTrain 10s 1 ease-in-out;
+            -webkit-animation: frontTrain 10s 1 cubic-bezier(0.645, 0.045, 0.355, 1.000); /* easeInOutCubic */
             -webkit-animation-fill-mode: forwards;
             -webkit-animation-play-state: running;
         }
@@ -262,6 +291,27 @@ section {
     }
     to {
         transform: translate(1250px, 357px);
+    }
+}
+
+@-webkit-keyframes miffyhop {
+    0% {
+        transform: translate(0,0);
+    }
+    20% {
+        transform: translate(-50px,-20px);
+    }
+    40% {
+        transform: translate(-80px, 80px);
+    }
+    60% {
+        transform: translate(-120px, 120px);
+    }
+    80% {
+        transform: translate(-300px, 250px);
+    }
+    100% {
+        transform: translate(-500px, 550px);
     }
 }
 
