@@ -7,6 +7,8 @@ $white: #ffffff;
 
 $bottom: 20px;
 
+$images: "../images/";
+
 * {-webkit-box-sizing: border-box; -webkit-user-select: none;}
 
 body {
@@ -47,6 +49,7 @@ section {
     background-position: left top;
     background-repeat: no-repeat;
     background-size: 1024px 704px;
+    overflow: hidden;
     // -webkit-transform-style: preserve-3d;
     // -moz-transform-style: preserve-3d;
     // -ms-transform-style: preserve-3d;
@@ -58,27 +61,74 @@ section {
 }
 
 .womenswear1 {
-    background-image: url(../images/womenswear1.jpg);
+    background-image: url(#{$images}womenswear1.jpg);
+    button {
+        transform: translate(758px, 605px);
+    }
 }
 
 .womenswear2 {
-    background-image: url(../images/womenswear2.jpg);
+    background-image: url(#{$images}womenswear2.jpg);
+    button {
+        transform: translate(758px, 605px);
+    }
 }
 
 .womensaccessories {
-    background-image: url(../images/womensaccessories.jpg);
+    background-image: url(#{$images}womensaccessories.jpg);
+    button {
+        transform: translate(114px, 162px);
+    }
 }
 
 .miffy {
-    background-image: url(../images/miffy.jpg);
+    background-image: url(#{$images}miffy.jpg);
+    button {
+        transform: translate(650px, 328px);
+    }
 }
 
 .kitchenaid {
-    background-image: url(../images/kitchenaid.jpg);
+    background-image: url(#{$images}kitchenaid.jpg);
+    button {
+        transform: translate(66px, 185px);
+    }
 }
 
 .train {
-    background-image: url(../images/train.jpg);
+    background-image: url(#{$images}train.jpg);
+    .prodstump {
+        @include size(1024px, 704px);
+        position: absolute;
+        top: 0; left: 0;
+        background: transparent url(../images/train-prodstumps.png) left top no-repeat;
+        background-size: 1024px 704px;
+    }
+    .toytrain {
+        @include size(383px, 206px);
+        background: transparent url(#{$images}toytrain.png) left top no-repeat;
+        background-size: 383px 206px;
+        transform: translate(653px, 300px);
+        &.toot {
+            -webkit-animation: frontTrain 10s 1 ease-in-out;
+            -webkit-animation-fill-mode: forwards;
+            -webkit-animation-play-state: running;
+        }
+    }
+    .backtrain {
+        @include size(316px, 146px);
+        background: transparent url(#{$images}backtrain.png) left top no-repeat;
+        background-size: 316px 146px;
+        transform: translate(-280px, 357px);  
+        &.toot {
+            -webkit-animation: backTrain 2.3s 4.5s 1 linear;
+            -webkit-animation-fill-mode: forwards;
+            -webkit-animation-play-state: running;
+        }  
+    }
+    button {
+        transform: translate(574px, -155px);
+    }
 }
 
 
@@ -89,7 +139,7 @@ section {
     // opacity: 0;
     -webkit-transition: opacity 0.5s ease;
     background-color: $black;
-    position: fixed;
+    position: relative;
     border-radius: 10px;
     color: $white;
     text-decoration: none;
@@ -104,7 +154,6 @@ section {
     &.shop {
         height: 43px;
         padding: 0 20px;
-        bottom: $bottom; right: 20px;
         line-height: 40px;
         z-index: 10000;
         div {
@@ -179,3 +228,43 @@ section {
 @-webkit-keyframes fadeOut { from { opacity:1; } to { opacity:0; } }
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
+@-webkit-keyframes frontTrain {
+    from {
+        transform: translate(653px, 300px);
+    }
+    25% {
+        transform: translate(-600px, 300px);
+        opacity: 1;
+    }
+    26% {
+        transform: translate(-600px, 300px);
+        opacity: 0;
+    }
+    27% {
+        transform: translate(1250px, 300px);
+    }
+    80% {
+        opacity: 0;
+        transform: translate(1250px, 300px);
+    }
+    81% {
+        opacity: 1;
+        transform: translate(1250px, 300px);
+    }
+    to {
+        transform: translate(653px, 300px);
+    }
+}
+
+@-webkit-keyframes backTrain {
+    from {
+        transform: translate(-280px, 357px);
+    }
+    to {
+        transform: translate(1250px, 357px);
+    }
+}
+
+.paused{
+    -webkit-animation-play-state:paused;
+}

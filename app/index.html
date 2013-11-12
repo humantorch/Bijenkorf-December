@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>bkf dec</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
@@ -19,32 +19,35 @@
         <div id="randTarget" class="swiper-wrapper">
 
             <section class="womenswear1 swiper-slide" data-shopurl='http://is.gd/DyMr0y'>
-                <h1>WOMEN'S CLOTHES</h1>
+                <button class="btnn shop"><div><span>Bekijk gehele aanbod</span><img src="images/chevrons.png"></div></button>
             </section>
 
             <section class="womenswear2 swiper-slide lightsteelblue" data-shopurl='http://is.gd/DyMr0y'>
-                <h1>WOMEN'S CLOTHES #2</h1>
+                <button class="btnn shop"><div><span>Bekijk gehele aanbod</span><img src="images/chevrons.png"></div></button>
             </section>
 
             <section class="womensaccessories swiper-slide blue" data-shopurl='http://is.gd/DyMr0y'>
-                <h1>WOMEN'S ACCESSORIES</h1>
+                <button class="btnn shop"><div><span>Bekijk gehele aanbod</span><img src="images/chevrons.png"></div></button>
             </section>
 
             <section class="miffy swiper-slide red" data-shopurl='http://is.gd/DyMr0y'>
-                <h1>TOYS</h1>
+                <button class="btnn shop"><div><span>Bekijk gehele aanbod</span><img src="images/chevrons.png"></div></button>
             </section>
 
             <section class="kitchenaid swiper-slide pink" data-shopurl='http://is.gd/DyMr0y'>
-                <h1>KITCHENAID</h1>
+                <button class="btnn shop"><div><span>Bekijk gehele aanbod</span><img src="images/chevrons.png"></div></button>
             </section>
 
             <section class="train swiper-slide goldenrod" data-shopurl='http://is.gd/DyMr0y'>
-                <h1>FOOD</h1>
+                <div class="backtrain" id="backtrain"></div>
+                <div class="prodstump" id="prodstump"></div>
+                <div class="toytrain" id="toytrain"></div>
+                <button class="btnn shop"><div><span>Bekijk gehele aanbod</span><img src="images/chevrons.png"></div></button>
             </section>
 
         </div>
 
-        <button class="btnn shop"><div><span>Bekijk gehele aanbod</span><img src="images/chevrons.png"></div></button>
+        
 
     
         <div class="storefront swiper-no-swiping">
@@ -56,6 +59,7 @@
         <!-- HIDDEN container for image-loading detection -->
         <div class="imagesloaded visuallyhidden">
             <img src="images/chevrons.png">
+            <audio id="soundsprite" src="audio/bkf.dec.mp3"></audio>
         </div>
 
         <!-- build:js scripts/vendor.js -->
@@ -78,9 +82,8 @@
         <script src="scripts/utilities.js"></script>
         <script src="scripts/vendor/imagesloaded.js"></script>
         <script src="scripts/vendor/swiper.js"></script>
-        <script src="scripts/vendor/swiper.progress-1.0.js"></script>
         <script src="scripts/main.js"></script>
-        <!-- endbuild -->
+        <!-- endbuild --> 
 
         <!-- build:js scripts/plugins.js -->
 
@@ -88,7 +91,7 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-               BKF.Global.kickit();
+                BKF.Global.kickit();
             });
         </script>
 </body>

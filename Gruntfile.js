@@ -45,7 +45,7 @@ module.exports = function (grunt) {
                 port: 9000,
                 livereload: 35729,
                 // change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost'
+                hostname: '0.0.0.0'
             },
             livereload: {
                 options: {
@@ -119,7 +119,7 @@ module.exports = function (grunt) {
                 httpGeneratedImagesPath: '/images/generated',
                 httpFontsPath: '/styles/fonts',
                 relativeAssets: false,
-                assetCacheBuster: false
+                assetCacheBuster: true
             },
             dist: {
                 options: {
@@ -182,7 +182,8 @@ module.exports = function (grunt) {
         },
         usemin: {
             options: {
-                assetsDirs: ['<%= yeoman.dist %>']
+                dirs: ['<%= yeoman.dist %>'],
+                basedir: ['<%= yeoman.dist %>']
             },
             html: ['<%= yeoman.dist %>/{,*/}*.html'],
             css: ['<%= yeoman.dist %>/styles/{,*/}*.css']
@@ -257,7 +258,9 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/{,*/}*.{webp,gif}',
                         'styles/fonts/{,*/}*.*',
-                        'bower_components/sass-bootstrap/fonts/*.*'
+                        'bower_components/sass-bootstrap/fonts/*.*',
+                        'audio/{,*/}*.*',
+                        'web.appcache'
                     ]
                 }]
             },

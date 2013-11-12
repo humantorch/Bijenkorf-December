@@ -1,5 +1,5 @@
 /*jslint browser: true, devel: true */
-/*global imagesLoaded, Swiper, $, $$, log*/
+/*global imagesLoaded, Swiper, $, $$, log, createjs*/
 
 var BKF = BKF || {};
 
@@ -18,7 +18,7 @@ BKF.Global = (function (window, document, undefined) {
 	self = {
 
         kickit: function() {
-			log('can i kick it');
+			// log('can i kick it');
 			/* NON-IPAD WARNING*/
 
 			// if (navigator.userAgent.match(/iPad/i) === null) {
@@ -29,7 +29,9 @@ BKF.Global = (function (window, document, undefined) {
 
 			document.ontouchmove = function(e){ e.preventDefault(); }; // fix for swiping going all bendy-wendy
 
-			var bodyswiper;
+			var bodyswiper,
+                $toytrain = document.getElementById('toytrain'),
+                $backtrain = document.getElementById('backtrain');
 
 			// self.randomizeList('randTarget');
 
@@ -75,9 +77,12 @@ BKF.Global = (function (window, document, undefined) {
 			/*EVENT LISTENERS*/
 
 			// show & hide shop iframe
-			$('.shop').addEventListener(UP ,function() {
-				$('.storefront').classList.add('fadeIn');
-				$('.storefront').classList.add('shown');
+
+			[].forEach.call( document.querySelectorAll('button'), function(el) {
+				el.addEventListener(UP, function() {
+					$('.storefront').classList.add('fadeIn');
+					$('.storefront').classList.add('shown');
+				}, false);
 			});
 
 			$('.closebtn').addEventListener(UP, function() {
@@ -89,10 +94,78 @@ BKF.Global = (function (window, document, undefined) {
 
 
 
+
+
+
+
+            /* SOUND SETUP */
+            var sounds = document.getElementById('soundsprite'),
+                soundData = {
+                    silence: {
+                        start: 0,
+                        length: 1.5
+                    },
+                    toot: {
+                        start: 3,
+                        length: 2
+                    }
+                };
+
+            // hax to load sound file
+            
+
+            function soundkick() {
+                sounds.play();
+                sounds.pause();
+                $('.womenswear1').removeEventListener(DOWN, soundkick);
+            }
+
+
+            $('.womenswear1').addEventListener(DOWN, soundkick);
+
+
+
+            /* TRAIN ANIMATION */
+            var imgs;
+
+            $('#toytrain').addEventListener(UP, function() {
+                self.toot();
+                sounds.currentTime = soundData.toot.start;
+                sounds.play();
+                imgs = $$('.toot');
+
+                for ( var i = 0; i < imgs.length; i++ ) {
+                    imgs[i].onclick = toggleAnimation;
+                    // imgs[i].style.webkitAnimationPlayState = 'running';
+                }
+            });
+
+            
+
+            
+
+            function toggleAnimation() {
+                console.log('toggleAnimation');
+                var style;
+                for ( var i = 0; i < imgs.length; i++ ) {
+                    style = imgs[i].style;
+                    console.log(style.webkitAnimationPlayState, i);
+                    if ( style.webkitAnimationPlayState === 'running' ) {
+                        style.webkitAnimationPlayState = 'paused';
+                        // document.body.className = 'paused';
+                    } else {
+                        style.webkitAnimationPlayState = 'running';
+                        // document.body.className = '';       
+                    }
+                }
+            }
+
 			/*KICK OUT THE JAMS*/
 			imagesLoaded($('.imagesloaded'), function() {
 				self.contshow();
 			});
+
+            
 
         },
 
@@ -131,7 +204,16 @@ BKF.Global = (function (window, document, undefined) {
 		        ++i;
 		    }
 		    list.style.display='block';
-		}
+		},
+
+        toot: function() {
+            $('#toytrain').classList.add('toot');
+            $('#backtrain').classList.add('toot');
+            setTimeout(function() {
+                $('#toytrain').classList.remove('toot');
+                $('#backtrain').classList.remove('toot');
+            }, 11000);
+        }
 	};
 
     return self;
