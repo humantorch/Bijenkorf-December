@@ -15,6 +15,7 @@ var $ = function(el) {
    return document.querySelector(el);
 };
 
-var $$ = function(el) {
-   return document.querySelectorAll(el);
-};
+var forEach = Array.prototype.forEach,
+    // query selector all runs a CSS selector and returns a list of elements
+    // matching the selector
+    $$ = document.querySelectorAll.bind(document);

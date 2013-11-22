@@ -1,5 +1,5 @@
 /*jslint browser: true, devel: true */
-/*global imagesLoaded, Swiper, $, $$, log, PathAnimator*/
+/*global imagesLoaded, Swiper, $, $$, log, PathAnimator, forEach*/
 
 var BKF = BKF || {};
 
@@ -13,7 +13,30 @@ BKF.Global = (function (window, document, undefined) {
     var DOWN = touch() === false ? 'mousedown' : 'touchstart',
 		UP = touch() === false ? 'mouseup' : 'touchend',
 		$body = $('body'),
-		self;
+		self,
+		sounds = document.getElementById('soundsprite'),
+        soundData = {
+            silence: {
+                start: 0,
+                length: 1.5
+            },
+            toot: {
+                start: 3,
+                length: 2
+            },
+            birdL: {
+                start: 7,
+                length: 0.9
+            },
+            birdM: {
+                start: 9,
+                length: 0.9
+            },
+            birdR: {
+                start: 11,
+                length: 0.9
+            }
+        };
 
 	self = {
 
@@ -29,11 +52,7 @@ BKF.Global = (function (window, document, undefined) {
 
 			document.ontouchmove = function(e){ e.preventDefault(); }; // fix for swiping going all bendy-wendy
 
-			var bodyswiper,
-                $toytrain = document.getElementById('toytrain'),
-                $backtrain = document.getElementById('backtrain');
-
-			// self.randomizeList('randTarget');
+			var bodyswiper;
 
 			bodyswiper = new Swiper(document.body,{
 				mode: 'horizontal',
@@ -41,10 +60,17 @@ BKF.Global = (function (window, document, undefined) {
 				slideVisibleClass: 'active',
 				loop: true,
 				progress: false,
+				noSwiping : true,
 				onSlideChangeStart: function() {
-					log('bodyswipestart');
+					log($('.swiper-slide-active'));
 				},
 				onSlideChangeEnd: function() {
+					[].forEach.call( $$('.supernova'), function(el) {
+						el.classList.remove('nova');
+					});
+					setTimeout(function() {
+						$('.swiper-slide-active .supernova').classList.add('nova');
+					},1000);
 					/* KEEP THESE, THEY MAY BE USEFUL LATER */
 					$('.storefront iframe').src = $('.active').dataset.shopurl;
 					// $('.shop').classList.remove('fadeIn');
@@ -92,52 +118,76 @@ BKF.Global = (function (window, document, undefined) {
 				},500);
 			});
 
-
-
-
-
-
-
-            /* SOUND SETUP */
-            var sounds = document.getElementById('soundsprite'),
-                soundData = {
-                    silence: {
-                        start: 0,
-                        length: 1.5
-                    },
-                    toot: {
-                        start: 3,
-                        length: 2
-                    }
-                };
+            
 
             // hax to load sound file
             
 
             function soundkick() {
+				console.log('soundkick');
                 sounds.play();
                 sounds.pause();
-                $('.womenswear1').removeEventListener(DOWN, soundkick);
+                document.removeEventListener(DOWN, soundkick);
             }
 
 
-            $('.womenswear1').addEventListener(DOWN, soundkick);
+            document.addEventListener(DOWN, soundkick);
 
 
+
+            /* BIRD ANIMATION */
+
+			forEach.call($$('.bird-l, .bird-m, .bird-r'), function(v) {
+				v.addEventListener(UP, function(e) {
+					if (!sounds.paused) {
+						sounds.pause();
+					}
+					setTimeout(function() {
+						var birdsong = e.target.dataset.birdsong;
+						e.target.classList.add('birdhop');
+						setTimeout(function() {
+							e.target.classList.remove('birdhop');
+						},600);
+
+						log(soundData[birdsong].start);
+						sounds.currentTime = soundData[birdsong].start;
+						sounds.play();
+
+					
+						sounds.addEventListener('timeupdate', function() {
+							self.handler(birdsong);
+						}, false);
+					},1);
+			    });
+			});
+
+			/* FLOWER ANIMATION */
+			document.addEventListener(UP, function(e) {
+				if (e.target.webkitMatchesSelector('.f-trigger') && !e.target.parentNode.classList.contains('sway')) {
+					// e.target.parentNode.classList.remove('sway');
+					[].forEach.call( $$('.flower'), function(flower) {
+						flower.classList.add('sway');
+					});
+	                setTimeout(function() {
+						[].forEach.call( $$('.flower'), function(flower) {
+							flower.classList.remove('sway');
+						});
+	                },13050);
+				}
+            });
 
             /* TRAIN ANIMATION */
-            var imgs;
 
-            $('#toytrain').addEventListener(UP, function() {
-                self.toot();
-                sounds.currentTime = soundData.toot.start;
-                sounds.play();
-                imgs = $$('.toot');
+            document.addEventListener(UP, function(e) {
+				if (e.target.webkitMatchesSelector('.toytrain')) {
+	                self.toot(e.target);
+	                sounds.currentTime = soundData.toot.start;
+	                sounds.play();
 
-                for ( var i = 0; i < imgs.length; i++ ) {
-                    imgs[i].onclick = toggleAnimation;
-                    // imgs[i].style.webkitAnimationPlayState = 'running';
-                }
+					sounds.addEventListener('timeupdate', function() {
+						self.handler('toot');
+					}, false);
+				}
             });
 
 
@@ -147,27 +197,6 @@ BKF.Global = (function (window, document, undefined) {
 				// $('.nijnte').classList.add('nijntjehop');
 				setTimeout(self.nijntjehop,750);
             });
-            
-
-            
-
-
-
-            function toggleAnimation() {
-                console.log('toggleAnimation');
-                var style;
-                for ( var i = 0; i < imgs.length; i++ ) {
-                    style = imgs[i].style;
-                    console.log(style.webkitAnimationPlayState, i);
-                    if ( style.webkitAnimationPlayState === 'running' ) {
-                        style.webkitAnimationPlayState = 'paused';
-                        // document.body.className = 'paused';
-                    } else {
-                        style.webkitAnimationPlayState = 'running';
-                        // document.body.className = '';       
-                    }
-                }
-            }
 
 			/*KICK OUT THE JAMS*/
 			imagesLoaded($('.imagesloaded'), function() {
@@ -183,63 +212,51 @@ BKF.Global = (function (window, document, undefined) {
 			$('.storefront iframe').src = $('.active').dataset.shopurl;
         },
 
-        randomizeList: function(target) {
-		    var list = document.getElementById(target),
-		        nodes = list.children,
-		        i = 0;
-
-		    nodes = Array.prototype.slice.call(nodes);
-		    // nodes = randomizeItems(nodes);
-
-		    var cached = nodes.slice(0),
-		        temp,
-		        ii = cached.length,
-		        rand;
-		        
-		    while(--ii) {
-		        rand = Math.floor(ii * Math.random());
-		        temp = cached[rand];
-		        cached[rand] = cached[ii];
-		        cached[ii] = temp;
+		handler: function(snd) {
+		    if (sounds.currentTime >= soundData[snd].start + soundData[snd].length) {
+		        sounds.pause();
+		        sounds.removeEventListener('timeupdate', self.handler, false);
 		    }
-
-
-		    nodes = cached;
-
-
-
-		    while(i < nodes.length) {
-		        list.appendChild(nodes[i]);
-		        ++i;
-		    }
-		    list.style.display='block';
 		},
 
-        toot: function() {
-            $('#toytrain').classList.add('toot');
-            $('#backtrain').classList.add('toot');
+        toot: function(e) {
+			console.log(e);
+			[].forEach.call($$('.toytrain, .backtrain'), function(el) {
+				el.classList.add('toot');
+			});
+            console.log('tootstart');
             setTimeout(function() {
-                $('#toytrain').classList.remove('toot');
-                $('#backtrain').classList.remove('toot');
-            }, 11000);
+                [].forEach.call($$('.toytrain, .backtrain'), function(el) {
+					el.classList.remove('toot');
+				});
+                console.log('tootend');
+            }, 16250); //250ms longer than frontTrain animation sequence
+        },
+
+        birdhop: function() {
+			console.log(this);
         },
 
         nijntjehop: function() {
 			console.log('nijnthehop start');
 
-			var path = 'M491.725,42.482c0,0-16.55-121.96-140.518-132.759 C103.793-111.828,90.863,467.482,90.863,467.482S79.656,295.069-1.379,295.069s-180.172,155.172-180.172,155.172',
+			var path = 'M494.725,43.482c0,0-16.55-121.96-140.518-132.759 C106.793-110.828,93.863,468.482,93.863,468.482S82.656,296.069,1.621,296.069s-180.172,155.172-180.172,155.172',
 			    pathAnimator = new PathAnimator( path ),    // initiate a new pathAnimator object
 			    objToAnimate = document.getElementById('nijnte'),    // The object that will move along the path
-			    speed = 3,          // seconds that will take going through the whole path
+			    speed = 1.9,          // seconds that will take going through the whole path
 			    reverse = false,    // go back of forward along the path
 			    startOffset = 0;    // between 0% to 100%
+			    // easing = function(t){ t*(2-t); };    // optional easing function
 			    
 			
 
 			function step( point, angle ){
 			    // do something every "frame" with: point.x, point.y & angle
+			    console.log(angle);
 			    objToAnimate.style.cssText = 'top:' + point.y + 'px;' +
-			                                'left:' + point.x + 'px;';
+			                                'left:' + point.x + 'px;' +'';
+			                                // 'transform:rotate('+ angle +'deg);' +
+			                                // '-webkit-transform:rotate('+ angle +'deg);';
 			}
 
 			function finish(){
@@ -247,7 +264,7 @@ BKF.Global = (function (window, document, undefined) {
 				console.log('nijntjehop complete');
 			}
 
-			pathAnimator.start( speed, step, reverse, startOffset, finish);
+			pathAnimator.start( speed, step, reverse, startOffset, finish, function(t){  return Math.pow(t,1.5); });
         }
 	};
 

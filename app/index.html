@@ -1,15 +1,12 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="no-js">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>bkf dec</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
@@ -17,37 +14,64 @@
     <body id="swipeBox" class="swiper-container">
         
         <div id="randTarget" class="swiper-wrapper">
-            <section class="miffy swiper-slide red" data-shopurl='http://is.gd/DyMr0y'>
+
+
+            <section class="womensaccessories swiper-slide " data-shopurl='http://mvtest.net'>
+                <div id="flowercontainer" class="swiper-no-swiping flowercontainer">
+                    <div class="flower-l flower">
+                        <a class="f-trigger"></a>
+                    </div>
+                    <div class="flower-lm flower">
+                        <a class="f-trigger"></a>
+                    </div>
+                    <div class="flower-rm flower">
+                        <a class="f-trigger"></a>
+                    </div>
+                    <div class="flower-r flower">
+                        <a class="f-trigger"></a>
+                    </div>
+                </div>
+                <div class="supernova nova"><span>Bewegen</span></div>
+                <button class="btnn shop"><div><span>Ontdek onze eyecatchers voor dames</span><img src="images/chevrons.png"></div></button>
+            </section>
+
+            <section class="womenswear womenswear1 swiper-slide" data-shopurl='http://mvtest.net'>
+                <div class="bird-l bird" data-birdsong="birdM"></div>
+                <div class="bird-m bird" data-birdsong="birdM"></div>
+                <div class="bird-r bird" data-birdsong="birdM"></div>
+                <div class="supernova"><span>Fluiten</span></div>
+                <button class="btnn shop"><div><span>Ontdek ons gehele aanbod partymode</span><img src="images/chevrons.png"></div></button>
+            </section>
+
+            <section class="womenswear womenswear2 swiper-slide " data-shopurl='http://mvtest.net'>
+                <div class="bird-l bird" data-birdsong="birdM"></div>
+                <div class="bird-m bird" data-birdsong="birdM"></div>
+                <div class="bird-r bird" data-birdsong="birdM"></div>
+                <div class="supernova"><span>Fluiten</span></div>
+                <button class="btnn shop"><div><span>Ontdek het gehele aanbod partymode</span><img src="images/chevrons.png"></div></button>
+            </section>
+
+            <!-- womens accessories go here -->
+
+            <section class="miffy swiper-slide " data-shopurl='http://mvtest.net'>
                 <object class="svgPath" id='svgPath' data="images/nintje.svg" width="1024" height="704" type="image/svg+xml"></object>
                 <div class="dome-anim dome"></div>
                 <div class="dome-anim nijnte" id="nijnte"></div>
-                <button class="btnn shop"><div><span>Bekijk gehele aanbod</span><img src="images/chevrons.png"></div></button>
+                <div class="supernova"><span>Optillen</span></div>
+                <button class="btnn shop"><div><span>Ontdek onze babygifts</span><img src="images/chevrons.png"></div></button>
             </section>
 
-            
-            <section class="womenswear1 swiper-slide" data-shopurl='http://is.gd/DyMr0y'>
-                <button class="btnn shop"><div><span>Bekijk gehele aanbod</span><img src="images/chevrons.png"></div></button>
+            <section class="kitchenaid swiper-slide " data-shopurl='http://mvtest.net'>
+                <button class="btnn shop"><div><span>Ontdek onze keukenmachines</span><img src="images/chevrons.png"></div></button>
             </section>
 
-            <section class="womenswear2 swiper-slide lightsteelblue" data-shopurl='http://is.gd/DyMr0y'>
-                <button class="btnn shop"><div><span>Bekijk gehele aanbod</span><img src="images/chevrons.png"></div></button>
-            </section>
-
-            <section class="womensaccessories swiper-slide blue" data-shopurl='http://is.gd/DyMr0y'>
-                <button class="btnn shop"><div><span>Bekijk gehele aanbod</span><img src="images/chevrons.png"></div></button>
-            </section>
-
-            <!-- miffie normally goes here -->
-
-            <section class="kitchenaid swiper-slide pink" data-shopurl='http://is.gd/DyMr0y'>
-                <button class="btnn shop"><div><span>Bekijk gehele aanbod</span><img src="images/chevrons.png"></div></button>
-            </section>
-
-            <section class="train swiper-slide goldenrod" data-shopurl='http://is.gd/DyMr0y'>
+            <section class="train swiper-slide " data-shopurl='http://mvtest.net'>
                 <div class="backtrain" id="backtrain"></div>
                 <div class="prodstump" id="prodstump"></div>
                 <div class="toytrain" id="toytrain"></div>
-                <button class="btnn shop"><div><span>Bekijk gehele aanbod</span><img src="images/chevrons.png"></div></button>
+                <div class="supernova"><span>Rijden</span></div>
+                <button class="btnn shop"><div><span>Ontdek onze kerstdelicatessen</span><img src="images/chevrons.png"></div></button>
+                <p class="subtext">(Ontdek een nog breder aanbod in onze winkels)</p>
             </section>
 
         </div>
@@ -64,7 +88,11 @@
         <!-- HIDDEN container for image-loading detection -->
         <div class="imagesloaded visuallyhidden">
             <img src="images/chevrons.png">
-            <audio id="soundsprite" src="audio/bkf.dec.mp3"></audio>
+            <img src="images/womenswear1.jpg">
+            <img src="images/womenswear2.jpg">
+            <img src="images/train.jpg">
+            <img src="images/train-prodstumps.png">
+            <audio id="soundsprite" src="audio/bkf.dec3.mp3"></audio>
         </div>
 
         <!-- build:js scripts/vendor.js -->

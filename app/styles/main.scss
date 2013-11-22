@@ -58,26 +58,167 @@ section {
         @extend .visuallyhidden;
         color: red;
     }
+    .supernova {
+        background: transparent url(../images/supernova.png) center center no-repeat;
+        background-size: cover;
+        @include size(70px, 69px);
+        transform: scale(0);
+        position: absolute;
+        color: white;
+        text-shadow: 0 0 15px white, 0 0 15px white, 0 0 15px white, 0 0 15px white, 0 0 5px white, 0 0 5px white;
+        text-align: center;
+        font-size: 45px;
+        pointer-events: none;
+        z-index: 5000;
+        &:before {
+            content:'•';
+            line-height: 70px;
+            color: white;
+            opacity: 0.2;
+        }
+        &.nova {
+            transform: scale(1);
+            transition: all 1s ease-in-out;
+            -webkit-animation: novarings 5s infinite ease-in-out;
+            &:before {
+                -webkit-animation: nova 5s infinite ease-in-out;
+            }
+        }
+        span {
+            font-size: 15px;
+            font-weight: bold;
+            text-shadow: 0 0 2px black, 0 0 2px black;
+            padding-left: 3px;
+            display: block;
+            margin: -44px 0 0 48px;
+        }
+    }
+}
+
+.womenswear {
+    .bird {
+        position: absolute;
+        &.birdhop {
+            -webkit-animation: birdhop 1.5s 1 ease-out;
+            // -webkit-animation-fill-mode: forwards;
+        }
+    }
+    .bird-l {
+        background: url(../images/bird-l.png) left top no-repeat;
+        background-size: 106px 59px;
+        @include size(106px, 59px);
+        left: 124px;
+        top: 165px;
+    }
+    .bird-m {
+        background: url(../images/bird-m.png) left top no-repeat;
+        background-size:114px 86px;
+        @include size(114px, 86px);
+        left: 233px;
+        top: 140px;
+    }
+    .bird-r {
+        background: url(../images/bird-r.png) left top no-repeat;
+        background-size:119px 88px;
+        @include size(119px, 88px);
+        left: 750px;
+        top: 131px;
+    }
+
 }
 
 .womenswear1 {
     background-image: url(#{$images}womenswear1.jpg);
+    .supernova {
+        left: 299px;
+        top: 141px;
+    }
     button {
-        transform: translate(758px, 605px);
+        transform: translate(126px, 605px);
     }
 }
 
 .womenswear2 {
     background-image: url(#{$images}womenswear2.jpg);
+    .supernova {
+        left: 723px;
+        top: 137px;
+    }
     button {
-        transform: translate(758px, 605px);
+        transform: translate(126px, 605px);
     }
 }
 
 .womensaccessories {
-    background-image: url(#{$images}womensaccessories.jpg);
+    background-image: url(#{$images}womensaccessories.jpg);        
+    .flower {
+            position: absolute;
+            .f-trigger {
+                display: block;
+            }
+        }
+    .flower-l {
+        background: transparent url(../images/flower-l.png) left top no-repeat;
+        @include size(80px, 337px);
+        background-size: 80px 337px;
+        left: 440px;
+        top: 530px;
+        &.sway {
+            -webkit-animation: flowerl 8s 0.5s 1 ease-in-out;
+        }
+        .f-trigger {
+            @include size(40px, 50px);
+            margin-left: 14px;
+        }
+    }
+    .flower-lm {
+        background: transparent url(../images/flower-lm.png) left top no-repeat;
+        @include size(247px, 528px);
+        background-size: 247px 528px;
+        left: 380px;
+        top: 590px;
+        &.sway {
+            -webkit-animation: flowerl 13s 1 ease-in-out;
+        }
+        .f-trigger {
+            @include size(70px, 72px);
+            margin-left: 177px;
+        }
+    }
+    .flower-rm {
+        background: transparent url(../images/flower-rm.png) left top no-repeat;
+        @include size(141px, 303px);
+        background-size: 141px 303px;
+        left: 670px;
+        top: 590px;
+        &.sway {
+            -webkit-animation: flowerl 10.5s 1 ease-in-out;
+        }
+        .f-trigger {
+            @include size(55px, 61px);
+            margin-left: 37px;
+        }    
+    }
+    .flower-r {
+        background: transparent url(../images/flower-r.png) left top no-repeat;
+        @include size(121px, 286px);
+        background-size: 121px 286px;
+        left: 860px;
+        top: 577px;
+        &.sway {
+            -webkit-animation: flowerl 9s 0.7s 1 ease-in-out;
+        }
+        .f-trigger {
+            @include size(57px, 57px);
+            margin-left: 64px;
+        }
+    }
+    .supernova {
+        left: 587px;
+        top: 570px;
+    }
     button {
-        transform: translate(114px, 162px);
+        transform: translate(10px, 112px);
     }
 }
 
@@ -97,20 +238,24 @@ section {
             z-index: 150;
             &.nijntjehop {
                 transform: translate(0, -200px);
-                transition: all 1s ease-in;
+                transition: all 0.5s ease-in;
             }
         }
         &.nijnte {
             background: transparent url(../images/nintje.png) left top no-repeat;
             z-index: 100;
             &.nijntjehop {
-                -webkit-animation: miffyhop 2s 1 0.5s linear; /* easeInOutCubic */
+                -webkit-animation: miffyhop 2s 1 0.5s ease-in; /* easeInOutCubic */
                 -webkit-animation-fill-mode: forwards;
             }
         }
     }
     .nijntjehop {
 
+    }
+    .supernova {
+        left: 560px;
+        top: 117px;
     }
     button {
         transform: translate(650px, 328px);
@@ -139,7 +284,7 @@ section {
         background-size: 383px 206px;
         transform: translate(653px, 300px);
         &.toot {
-            -webkit-animation: frontTrain 10s 1 cubic-bezier(0.645, 0.045, 0.355, 1.000); /* easeInOutCubic */
+            -webkit-animation: frontTrain 15s 1 cubic-bezier(0.645, 0.045, 0.355, 1.000); /* easeInOutCubic */
             -webkit-animation-fill-mode: forwards;
             -webkit-animation-play-state: running;
         }
@@ -150,13 +295,27 @@ section {
         background-size: 316px 146px;
         transform: translate(-280px, 357px);  
         &.toot {
-            -webkit-animation: backTrain 2.3s 4.5s 1 linear;
+            -webkit-animation: backTrain 3.8s 6.5s 1 linear;
             -webkit-animation-fill-mode: forwards;
             -webkit-animation-play-state: running;
         }  
     }
+    .supernova {
+        left: 864px;
+        top: 450px;
+    }
+    .subtext {
+        position: absolute;
+        transform: translate(25px, -240px);
+        color: white;
+        font-size: 12px;
+        width: 290px; 
+        text-align: center;
+        font-weight: bold;
+        width: 330px;
+    }
     button {
-        transform: translate(574px, -155px);
+        transform: translate(25px, -245px);
     }
 }
 
@@ -270,15 +429,15 @@ section {
         opacity: 0;
     }
     27% {
-        transform: translate(1250px, 300px);
+        transform: translate(1450px, 300px);
     }
     80% {
         opacity: 0;
-        transform: translate(1250px, 300px);
+        transform: translate(1450px, 300px);
     }
     81% {
         opacity: 1;
-        transform: translate(1250px, 300px);
+        transform: translate(1450px, 300px);
     }
     to {
         transform: translate(653px, 300px);
@@ -312,6 +471,86 @@ section {
     }
     100% {
         transform: translate(-500px, 550px);
+    }
+}
+
+@-webkit-keyframes birdhop {
+    0% {
+        transform: translate(0,0);
+    }
+    20% {
+        transform: translate3d(0,-10px,10px);
+    }
+    40% {
+        transform: translate(0, 0);
+    }
+    60% {
+        transform: translate(0, -5px);
+    }
+    80% {
+        transform: translate(0, 0);
+    }
+}
+
+@-webkit-keyframes flowerl {
+    7% {
+        transform: rotate(-10deg);
+    }
+    15% {
+        transform: rotate(8deg);
+    }
+    30% {
+        transform: rotate(-4deg);
+    }
+    50% {
+        transform: rotate(2deg)
+    }
+    75% {
+        transform: rotate(-2deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
+
+@-webkit-keyframes nova {
+    0% {
+        opacity: 0.2;
+        background-size: cover;
+    }
+    25% {
+        opacity: 0.2;
+        background-size: cover;
+    }
+    50% {
+        opacity: 1;
+        background-size: 90px 90px;
+    }
+    75% {
+        opacity: 0.2;
+        background-size: cover;
+    }
+    100% {
+        opacity: 0.2;
+        background-size: cover;
+    }
+}
+
+@-webkit-keyframes novarings {
+    0% {
+        background-size: cover;
+    }
+    25% {
+        background-size: cover;
+    }
+    50% {
+        background-size: 90px 90px !important;
+    }
+    75% {
+        background-size: cover;
+    }
+    100% {
+        background-size: cover;
     }
 }
 
