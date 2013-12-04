@@ -1,5 +1,5 @@
 /*jslint browser: true, devel: true */
-/*global imagesLoaded, Swiper, $, $$, log, PathAnimator, forEach*/
+/*global imagesLoaded, Swiper, $, $$, log, PathAnimator, Howl */
 
 var BKF = BKF || {};
 
@@ -14,29 +14,18 @@ BKF.Global = (function (window, document, undefined) {
 		UP = touch() === false ? 'mouseup' : 'touchend',
 		$body = $('body'),
 		self,
-		sounds = document.getElementById('soundsprite'),
-        soundData = {
-            silence: {
-                start: 0,
-                length: 1.5
-            },
-            toot: {
-                start: 3,
-                length: 2
-            },
-            birdL: {
-                start: 7,
-                length: 0.9
-            },
-            birdM: {
-                start: 9,
-                length: 0.9
-            },
-            birdR: {
-                start: 11,
-                length: 0.9
-            }
-        };
+		howl = new Howl({
+			urls: ['audio/bkf.dec.track.mp3'],
+			sprite: {
+				toot: [0,11500],
+				birdL: [15000,2000],
+				birdM: [30000,2000],
+				birdR: [45000,2000],
+				chimes: [60000,10000],
+				boing: [75000, 3000]
+			}
+		}),
+		miffytimer, flowertimer;
 
 	self = {
 
@@ -59,45 +48,38 @@ BKF.Global = (function (window, document, undefined) {
 				speed: 500,
 				slideVisibleClass: 'active',
 				loop: true,
-				progress: false,
 				noSwiping : true,
-				onSlideChangeStart: function() {
-					log($('.swiper-slide-active'));
-				},
 				onSlideChangeEnd: function() {
+
 					[].forEach.call( $$('.supernova'), function(el) {
 						el.classList.remove('nova');
+						el.classList.remove('fadeOut');
 					});
+					[].forEach.call( $$('.dome-anim'), function(el) {
+						el.classList.remove('nijntjehop');
+						el.removeAttribute('style');
+					});
+
 					setTimeout(function() {
 						$('.swiper-slide-active .supernova').classList.add('nova');
-					},1000);
-					/* KEEP THESE, THEY MAY BE USEFUL LATER */
+					},100);
+					
 					$('.storefront iframe').src = $('.active').dataset.shopurl;
-					// $('.shop').classList.remove('fadeIn');
-					// setTimeout(function() {
-					// 	$('.shop').classList.remove('visuallyhidden');
-					// },500);
-					log('bodyswipeend');
+
+					[].forEach.call( $$('.flower'), function(flower) {
+						flower.classList.remove('sway');
+						$('.active .supernova').classList.remove('fadeOut');
+					});
+
+					clearTimeout(flowertimer);
+					clearTimeout(miffytimer);
+
+					$('.nijnte').classList.remove('backinplace');
+					$('.nijnte').classList.remove('offsettop');
+					$('.dome').classList.remove('nijntjehop');
+
 					$('body').scrollLeft = 0;
 				}
-				// },
-				// onProgressChange: function(swiper){
-				// 	for (var i = 0; i < swiper.slides.length; i++){
-				// 		var slide = swiper.slides[i];
-				// 		var progress = slide.progress;
-				// 		swiper.setTransform(slide,'translate3d(0px,0,'+(-Math.abs(progress*1500))+'px)');
-				// 	}
-				// },
-				// onTouchStart:function(swiper){
-				// 	for (var i = 0; i < swiper.slides.length; i++){
-				// 		swiper.setTransition(swiper.slides[i], 0);
-				// 	}
-				// },
-				// onSetWrapperTransition: function(swiper) {
-				// 	for (var i = 0; i < swiper.slides.length; i++){
-				// 		swiper.setTransition(swiper.slides[i], swiper.params.speed);
-				// 	}
-				// }
 			});
 
 			/*EVENT LISTENERS*/
@@ -118,84 +100,57 @@ BKF.Global = (function (window, document, undefined) {
 				},500);
 			});
 
-            
-
-            // hax to load sound file
-            
-
-            function soundkick() {
-				console.log('soundkick');
-                sounds.play();
-                sounds.pause();
-                document.removeEventListener(DOWN, soundkick);
-            }
-
-
-            document.addEventListener(DOWN, soundkick);
-
-
-
-            /* BIRD ANIMATION */
-
-			forEach.call($$('.bird-l, .bird-m, .bird-r'), function(v) {
-				v.addEventListener(UP, function(e) {
-					if (!sounds.paused) {
-						sounds.pause();
-					}
+			/* BIRD ANIMATION */
+			document.addEventListener(DOWN, function(e) {
+				if (e.target.webkitMatchesSelector('.bird')) {
+					var birdsong = e.target.dataset.birdsong;
+					// console.log(birdsong);
+					e.target.classList.add('birdhop');
+					howl.play(birdsong);
 					setTimeout(function() {
-						var birdsong = e.target.dataset.birdsong;
-						e.target.classList.add('birdhop');
-						setTimeout(function() {
-							e.target.classList.remove('birdhop');
-						},600);
-
-						log(soundData[birdsong].start);
-						sounds.currentTime = soundData[birdsong].start;
-						sounds.play();
-
-					
-						sounds.addEventListener('timeupdate', function() {
-							self.handler(birdsong);
-						}, false);
-					},1);
-			    });
+						e.target.classList.remove('birdhop');
+					},600);
+				}
 			});
 
 			/* FLOWER ANIMATION */
-			document.addEventListener(UP, function(e) {
+			document.addEventListener(DOWN, function(e) {
 				if (e.target.webkitMatchesSelector('.f-trigger') && !e.target.parentNode.classList.contains('sway')) {
 					// e.target.parentNode.classList.remove('sway');
+					$('.active .supernova').classList.add('fadeOut');
 					[].forEach.call( $$('.flower'), function(flower) {
 						flower.classList.add('sway');
 					});
-	                setTimeout(function() {
+					howl.play('chimes');
+	                flowertimer = setTimeout(function() {
 						[].forEach.call( $$('.flower'), function(flower) {
 							flower.classList.remove('sway');
+							$('.active .supernova').classList.remove('fadeOut');
 						});
 	                },13050);
 				}
             });
 
             /* TRAIN ANIMATION */
-
-            document.addEventListener(UP, function(e) {
-				if (e.target.webkitMatchesSelector('.toytrain')) {
+            document.addEventListener(DOWN, function(e) {
+				if (e.target.webkitMatchesSelector('.toytrain') && !e.target.classList.contains('toot')) {
+					$('.active .supernova').classList.add('fadeOut');
 	                self.toot(e.target);
-	                sounds.currentTime = soundData.toot.start;
-	                sounds.play();
-
-					sounds.addEventListener('timeupdate', function() {
-						self.handler('toot');
-					}, false);
+	                howl.play('toot');
 				}
             });
 
 
             /* NIJNTJE ANIMATION */
-            $('.dome').addEventListener(UP, function() {
+            $('.dome').addEventListener(DOWN, function() {
+				// sounds.removeEventListener('timeupdate', self.handler, false);
 				$('.dome').classList.add('nijntjehop');
+				
 				// $('.nijnte').classList.add('nijntjehop');
-				setTimeout(self.nijntjehop,750);
+				setTimeout(function() {
+					self.nijntjehop();
+					howl.play('boing');
+				},750);
             });
 
 			/*KICK OUT THE JAMS*/
@@ -210,35 +165,32 @@ BKF.Global = (function (window, document, undefined) {
         contshow: function() {
 			$body.classList.add('loaded');
 			$('.storefront iframe').src = $('.active').dataset.shopurl;
+			setTimeout(function() {
+				$('.swiper-slide-active .supernova').classList.add('nova');
+			},400);
         },
 
-		handler: function(snd) {
-		    if (sounds.currentTime >= soundData[snd].start + soundData[snd].length) {
-		        sounds.pause();
-		        sounds.removeEventListener('timeupdate', self.handler, false);
-		    }
-		},
-
         toot: function(e) {
-			console.log(e);
+			// console.log(e.nextSibling);
 			[].forEach.call($$('.toytrain, .backtrain'), function(el) {
 				el.classList.add('toot');
 			});
-            console.log('tootstart');
+            // console.log('tootstart');
             setTimeout(function() {
                 [].forEach.call($$('.toytrain, .backtrain'), function(el) {
 					el.classList.remove('toot');
 				});
-                console.log('tootend');
+                $('.active .supernova').classList.remove('fadeOut');
             }, 16250); //250ms longer than frontTrain animation sequence
         },
 
         birdhop: function() {
-			console.log(this);
+			// console.log(this);
         },
 
         nijntjehop: function() {
-			console.log('nijnthehop start');
+			// console.log('nijnthehop start');
+			$('.active .supernova').classList.add('fadeOut');
 
 			var path = 'M494.725,43.482c0,0-16.55-121.96-140.518-132.759 C106.793-110.828,93.863,468.482,93.863,468.482S82.656,296.069,1.621,296.069s-180.172,155.172-180.172,155.172',
 			    pathAnimator = new PathAnimator( path ),    // initiate a new pathAnimator object
@@ -248,11 +200,8 @@ BKF.Global = (function (window, document, undefined) {
 			    startOffset = 0;    // between 0% to 100%
 			    // easing = function(t){ t*(2-t); };    // optional easing function
 			    
-			
-
-			function step( point, angle ){
+			function step(point){
 			    // do something every "frame" with: point.x, point.y & angle
-			    console.log(angle);
 			    objToAnimate.style.cssText = 'top:' + point.y + 'px;' +
 			                                'left:' + point.x + 'px;' +'';
 			                                // 'transform:rotate('+ angle +'deg);' +
@@ -260,12 +209,28 @@ BKF.Global = (function (window, document, undefined) {
 			}
 
 			function finish(){
-				// do something when animation is done
-				console.log('nijntjehop complete');
+				$('.nijnte').removeAttribute('style');
+				$('.nijnte').classList.add('offsettop');
+				miffytimer = setTimeout(function() {
+					// pathAnimator.start( speed, step, true, 100, self.fixmiffy, function(t){  return Math.pow(t,1.5); });
+					self.fixmiffy();
+				},5000);
+				
+				// console.log('nijntjehop complete');
 			}
 
 			pathAnimator.start( speed, step, reverse, startOffset, finish, function(t){  return Math.pow(t,1.5); });
-        }
+        },
+
+        fixmiffy: function() {
+			$('.nijnte').classList.add('backinplace');
+			setTimeout(function() {
+				$('.nijnte').classList.remove('backinplace');
+				$('.nijnte').classList.remove('offsettop');
+				$('.dome').classList.remove('nijntjehop');
+				$('.active .supernova').classList.remove('fadeOut');
+			},1000);
+		}
 	};
 
     return self;

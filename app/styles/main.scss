@@ -23,37 +23,18 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-.swiper-container {
-    // -webkit-perspective: 2500px;
-    // -moz-perspective: 2500px;
-    // -ms-perspective: 2500px;
-    // perspective: 2500px;
-}
-
-.swiper-wrapper {
-    // -webkit-transform-style: preserve-3d;
-    // -moz-transform-style: preserve-3d;
-    // -ms-transform-style: preserve-3d;
-    // transform-style: preserve-3d;
-}
-
 section {
     @include size(1024px, 704px);
     -webkit-transform: translate3d(0,0,0);
     -webkit-perspective: 1000;
     -webkit-transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
-    // display: inline-block;
     position: relative;
     float: left;
     background-position: left top;
     background-repeat: no-repeat;
     background-size: 1024px 704px;
     overflow: hidden;
-    // -webkit-transform-style: preserve-3d;
-    // -moz-transform-style: preserve-3d;
-    // -ms-transform-style: preserve-3d;
-    // transform-style: preserve-3d;
     h1 {
         @extend .visuallyhidden;
         color: red;
@@ -78,10 +59,16 @@ section {
         }
         &.nova {
             transform: scale(1);
-            transition: all 1s ease-in-out;
+            transition: all 0.4s ease-in-out;
             -webkit-animation: novarings 5s infinite ease-in-out;
+            // -webkit-transform: translate3d(0, 0, 0);
+            -webkit-backface-visibility: hidden;
+            -webkit-perspective: 1000;
             &:before {
                 -webkit-animation: nova 5s infinite ease-in-out;
+                // -webkit-transform: translate3d(0, 0, 0);
+                -webkit-backface-visibility: hidden;
+                -webkit-perspective: 1000;
             }
         }
         span {
@@ -91,6 +78,9 @@ section {
             padding-left: 3px;
             display: block;
             margin: -44px 0 0 48px;
+            &.left {
+                margin: -45px 0 0 -88px
+            }
         }
     }
 }
@@ -173,7 +163,7 @@ section {
     }
     .flower-lm {
         background: transparent url(../images/flower-lm.png) left top no-repeat;
-        @include size(247px, 528px);
+        @include size(277px, 528px);
         background-size: 247px 528px;
         left: 380px;
         top: 590px;
@@ -195,7 +185,7 @@ section {
             -webkit-animation: flowerl 10.5s 1 ease-in-out;
         }
         .f-trigger {
-            @include size(55px, 61px);
+            @include size(145px, 61px);
             margin-left: 37px;
         }    
     }
@@ -214,7 +204,7 @@ section {
         }
     }
     .supernova {
-        left: 587px;
+        left: 725px;
         top: 570px;
     }
     button {
@@ -235,7 +225,11 @@ section {
         top: 43px;
         &.dome {
             background: transparent url(../images/dome-transparent.png) left top no-repeat;
-            z-index: 150;
+            z-index: 150 !important;
+            transition: all 0.75s ease-in-out;
+            -webkit-transform: translate3d(0, 0, 0);
+            -webkit-backface-visibility: hidden;
+            -webkit-perspective: 1000;
             &.nijntjehop {
                 transform: translate(0, -200px);
                 transition: all 0.5s ease-in;
@@ -243,10 +237,26 @@ section {
         }
         &.nijnte {
             background: transparent url(../images/nintje.png) left top no-repeat;
-            z-index: 100;
+            z-index: 100 !important;
+            -webkit-transform: translate3d(0, 0, 0);
+            -webkit-backface-visibility: hidden;
+            -webkit-perspective: 1000;
+            // transition: all 1.75s ease-in-out;
             &.nijntjehop {
-                -webkit-animation: miffyhop 2s 1 0.5s ease-in; /* easeInOutCubic */
+                -webkit-animation: miffyhop 2s 1 5.5s ease-in; /* easeInOutCubic */
                 -webkit-animation-fill-mode: forwards;
+            }
+            &.offsettop {
+                top: -160px;
+                left: 560px;
+            }
+            &.backinplace {
+                left: 494px !important;
+                top: 43px !important;
+                transition: all 1s ease-in-out;
+                -webkit-transform: translate3d(0, 0, 0);
+                -webkit-backface-visibility: hidden;
+                -webkit-perspective: 1000;
             }
         }
     }
@@ -254,8 +264,8 @@ section {
 
     }
     .supernova {
-        left: 560px;
-        top: 117px;
+        left: 543px;
+        top: 48px;
     }
     button {
         transform: translate(650px, 328px);
@@ -264,6 +274,13 @@ section {
 
 .kitchenaid {
     background-image: url(#{$images}kitchenaid.jpg);
+    // .kitchenaid-prod {
+    //     position: absolute;
+    //     left: 0; top: 0;
+    //     @include size(1024px, 704px);
+    //     background: transparent url(#{$images}kitchenaid-app.png) left top no-repeat;
+    //     background-size: 1024px 704px;
+    // }
     button {
         transform: translate(66px, 185px);
     }
@@ -283,25 +300,34 @@ section {
         background: transparent url(#{$images}toytrain.png) left top no-repeat;
         background-size: 383px 206px;
         transform: translate(653px, 300px);
+        transition: all 0.5s ease-in-out;
         &.toot {
-            -webkit-animation: frontTrain 15s 1 cubic-bezier(0.645, 0.045, 0.355, 1.000); /* easeInOutCubic */
+            transition: all 1s ease-in-out;
+            -webkit-animation: frontTrain 15s 0s 1 cubic-bezier(0.645, 0.045, 0.355, 1.000); /* easeInOutCubic */
             -webkit-animation-fill-mode: forwards;
             -webkit-animation-play-state: running;
+            // -webkit-transform: translate3d(0, 0, 0);
+            -webkit-backface-visibility: hidden;
+            -webkit-perspective: 1000;
         }
     }
     .backtrain {
         @include size(316px, 146px);
+        -webkit-filter: blur(1px);
         background: transparent url(#{$images}backtrain.png) left top no-repeat;
         background-size: 316px 146px;
         transform: translate(-280px, 357px);  
         &.toot {
-            -webkit-animation: backTrain 3.8s 6.5s 1 linear;
+            -webkit-animation: backTrain 3.8s 5s 1 linear;
             -webkit-animation-fill-mode: forwards;
             -webkit-animation-play-state: running;
+            // -webkit-transform: translate3d(0, 0, 0);
+            -webkit-backface-visibility: hidden;
+            -webkit-perspective: 1000;
         }  
     }
     .supernova {
-        left: 864px;
+        left: 885px;
         top: 450px;
     }
     .subtext {
@@ -431,13 +457,16 @@ section {
     27% {
         transform: translate(1450px, 300px);
     }
-    80% {
+    60% {
         opacity: 0;
         transform: translate(1450px, 300px);
     }
-    81% {
+    61% {
         opacity: 1;
         transform: translate(1450px, 300px);
+    }
+    90% {
+        transform: translate(653px, 300px);
     }
     to {
         transform: translate(653px, 300px);
@@ -515,11 +544,11 @@ section {
 
 @-webkit-keyframes nova {
     0% {
-        opacity: 0.2;
+        opacity: 0.5;
         background-size: cover;
     }
     25% {
-        opacity: 0.2;
+        opacity: 0.5;
         background-size: cover;
     }
     50% {
@@ -527,11 +556,11 @@ section {
         background-size: 90px 90px;
     }
     75% {
-        opacity: 0.2;
+        opacity: 0.5;
         background-size: cover;
     }
     100% {
-        opacity: 0.2;
+        opacity: 0.5;
         background-size: cover;
     }
 }

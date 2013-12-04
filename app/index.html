@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>bkf dec</title>
+        <title>&nbsp;</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
 
@@ -15,8 +15,23 @@
         
         <div id="randTarget" class="swiper-wrapper">
 
+            <section class="womenswear womenswear1 swiper-slide" data-shopurl='http://m.debijenkorf.nl/search?fh_location=%2f%2fcatalog01%2fnl_NL%2fthemepage%3E%7bpartytops%7d&fh'>
+                <div class="bird-l bird" data-birdsong="birdL"></div>
+                <div class="bird-m bird" data-birdsong="birdM"></div>
+                <div class="bird-r bird" data-birdsong="birdR"></div>
+                <div class="supernova"><span>Fluiten</span></div>
+                <button class="btnn shop"><div><span>Ontdek onze partytops</span><img src="images/chevrons.png"></div></button>
+            </section>
 
-            <section class="womensaccessories swiper-slide " data-shopurl='http://mvtest.net'>
+            <section class="womenswear womenswear2 swiper-slide " data-shopurl='http://m.debijenkorf.nl/search?fh_location=%2f%2fcatalog01%2fnl_NL%2fthemepage%3E%7bpartymode%7d&fh'>
+                <div class="bird-l bird" data-birdsong="birdL"></div>
+                <div class="bird-m bird" data-birdsong="birdM"></div>
+                <div class="bird-r bird" data-birdsong="birdR"></div>
+                <div class="supernova"><span class="left">Fluiten</span></div>
+                <button class="btnn shop"><div><span>Ontdek ons gehele aanbod partymode</span><img src="images/chevrons.png"></div></button>
+            </section>
+
+            <section class="womensaccessories swiper-slide " data-shopurl='http://m.debijenkorf.nl/search?fh_location=%2f%2fcatalog01%2fnl_NL%2fthemepage%3E{accessoires}&fh'>
                 <div id="flowercontainer" class="swiper-no-swiping flowercontainer">
                     <div class="flower-l flower">
                         <a class="f-trigger"></a>
@@ -31,29 +46,11 @@
                         <a class="f-trigger"></a>
                     </div>
                 </div>
-                <div class="supernova nova"><span>Bewegen</span></div>
+                <div class="supernova"><span>Bewegen</span></div>
                 <button class="btnn shop"><div><span>Ontdek onze eyecatchers voor dames</span><img src="images/chevrons.png"></div></button>
             </section>
 
-            <section class="womenswear womenswear1 swiper-slide" data-shopurl='http://mvtest.net'>
-                <div class="bird-l bird" data-birdsong="birdM"></div>
-                <div class="bird-m bird" data-birdsong="birdM"></div>
-                <div class="bird-r bird" data-birdsong="birdM"></div>
-                <div class="supernova"><span>Fluiten</span></div>
-                <button class="btnn shop"><div><span>Ontdek ons gehele aanbod partymode</span><img src="images/chevrons.png"></div></button>
-            </section>
-
-            <section class="womenswear womenswear2 swiper-slide " data-shopurl='http://mvtest.net'>
-                <div class="bird-l bird" data-birdsong="birdM"></div>
-                <div class="bird-m bird" data-birdsong="birdM"></div>
-                <div class="bird-r bird" data-birdsong="birdM"></div>
-                <div class="supernova"><span>Fluiten</span></div>
-                <button class="btnn shop"><div><span>Ontdek het gehele aanbod partymode</span><img src="images/chevrons.png"></div></button>
-            </section>
-
-            <!-- womens accessories go here -->
-
-            <section class="miffy swiper-slide " data-shopurl='http://mvtest.net'>
+            <section class="miffy swiper-slide " data-shopurl='http://m.debijenkorf.nl/search?fh_location=%2f%2fcatalog01%2fnl_NL%2fthemepage%3E{baby}&fh'>
                 <object class="svgPath" id='svgPath' data="images/nintje.svg" width="1024" height="704" type="image/svg+xml"></object>
                 <div class="dome-anim dome"></div>
                 <div class="dome-anim nijnte" id="nijnte"></div>
@@ -61,11 +58,12 @@
                 <button class="btnn shop"><div><span>Ontdek onze babygifts</span><img src="images/chevrons.png"></div></button>
             </section>
 
-            <section class="kitchenaid swiper-slide " data-shopurl='http://mvtest.net'>
+            <section class="kitchenaid swiper-slide " data-shopurl='http://m.debijenkorf.nl/keuken/keukenapparatuur/keukenmachines/'>
+                <!-- <div class="kitchenaid-prod"></div> -->
                 <button class="btnn shop"><div><span>Ontdek onze keukenmachines</span><img src="images/chevrons.png"></div></button>
             </section>
 
-            <section class="train swiper-slide " data-shopurl='http://mvtest.net'>
+            <section class="train swiper-slide " data-shopurl='http://m.debijenkorf.nl/search?fh_location=%2f%2fcatalog01%2fnl_NL%2fthemepage%3E{delicatessen}&fh'>
                 <div class="backtrain" id="backtrain"></div>
                 <div class="prodstump" id="prodstump"></div>
                 <div class="toytrain" id="toytrain"></div>
@@ -91,8 +89,8 @@
             <img src="images/womenswear1.jpg">
             <img src="images/womenswear2.jpg">
             <img src="images/train.jpg">
+            <img src="images/backtrain.png">
             <img src="images/train-prodstumps.png">
-            <audio id="soundsprite" src="audio/bkf.dec3.mp3"></audio>
         </div>
 
         <!-- build:js scripts/vendor.js -->
@@ -108,7 +106,7 @@
             e=o.createElement(i);r=o.getElementsByTagName(i)[0];
             e.src='//www.google-analytics.com/analytics.js';
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X');ga('send','pageview');
+            ga('create','UA-7043656-10');ga('send','pageview');
         </script>
 
         <!-- build:js scripts/main.js -->
@@ -116,6 +114,7 @@
         <script src="scripts/vendor/imagesloaded.js"></script>
         <script src="scripts/vendor/swiper.js"></script>
         <script src="scripts/vendor/pathAnimator.js"></script>
+        <script src="scripts/vendor/howler.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild --> 
 
