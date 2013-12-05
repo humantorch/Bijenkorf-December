@@ -209,8 +209,14 @@ BKF.Global = (function (window, document, undefined) {
 			}
 
 			function finish(){
-				$('.nijnte').removeAttribute('style');
-				$('.nijnte').classList.add('offsettop');
+				setTimeout(function() {
+					[].forEach.call( $$('.nijnte'), function(el) {
+						el.getAttribute('style');
+						el.removeAttribute('style');
+						el.classList.add('offsettop');
+					});
+				},1000);
+				
 				miffytimer = setTimeout(function() {
 					// pathAnimator.start( speed, step, true, 100, self.fixmiffy, function(t){  return Math.pow(t,1.5); });
 					self.fixmiffy();
@@ -225,8 +231,11 @@ BKF.Global = (function (window, document, undefined) {
         fixmiffy: function() {
 			$('.nijnte').classList.add('backinplace');
 			setTimeout(function() {
-				$('.nijnte').classList.remove('backinplace');
-				$('.nijnte').classList.remove('offsettop');
+				[].forEach.call( $$('.nijnte'), function(el) {
+					el.classList.remove('backinplace');
+					el.classList.remove('offsettop');
+				});
+				
 				$('.dome').classList.remove('nijntjehop');
 				$('.active .supernova').classList.remove('fadeOut');
 			},1000);
