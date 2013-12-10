@@ -88,8 +88,10 @@ BKF.Global = (function (window, document, undefined) {
 
 			[].forEach.call( document.querySelectorAll('button'), function(el) {
 				el.addEventListener(UP, function() {
-					$('.storefront').classList.add('fadeIn');
-					$('.storefront').classList.add('shown');
+					setTimeout(function() {
+						$('.storefront').classList.add('fadeIn');
+						$('.storefront').classList.add('shown');
+					},500);
 				}, false);
 			});
 

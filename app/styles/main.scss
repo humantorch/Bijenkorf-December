@@ -51,12 +51,6 @@ section {
         font-size: 45px;
         pointer-events: none;
         z-index: 5000;
-        &:before {
-            content:'•';
-            line-height: 70px;
-            color: white;
-            opacity: 0.2;
-        }
         &.nova {
             transform: scale(1);
             transition: all 0.4s ease-in-out;
@@ -64,14 +58,20 @@ section {
             // -webkit-transform: translate3d(0, 0, 0);
             -webkit-backface-visibility: hidden;
             -webkit-perspective: 1000;
-            &:before {
+            .pulse {
                 -webkit-animation: nova 5s infinite ease-in-out;
                 // -webkit-transform: translate3d(0, 0, 0);
                 -webkit-backface-visibility: hidden;
                 -webkit-perspective: 1000;
             }
         }
-        span {
+        .pulse {
+            line-height: 69px;
+            color: white;
+            opacity: 0.2;
+            padding-left: 1px;
+        }
+        .novatext {
             font-size: 15px;
             font-weight: bold;
             text-shadow: 0 0 2px black, 0 0 2px black;
@@ -545,23 +545,18 @@ section {
 @-webkit-keyframes nova {
     0% {
         opacity: 0.5;
-        background-size: cover;
     }
     25% {
         opacity: 0.5;
-        background-size: cover;
     }
     50% {
         opacity: 1;
-        background-size: 90px 90px;
     }
     75% {
         opacity: 0.5;
-        background-size: cover;
     }
     100% {
         opacity: 0.5;
-        background-size: cover;
     }
 }
 
