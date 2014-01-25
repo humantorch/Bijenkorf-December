@@ -1,3 +1,9 @@
+This experience was built for De Bijenkorf's iPad app. Since the app is a native wrapper for a standards-based CMS, I was able to use HTML, CSS, and JavaScript to create the experience. This particular piece of content used sound in some interesting ways, which (among other things) really showcased the limitations iOS has in playing audio files – delay, lag, and the ability to play only one media stream at a time all conspired to require some pretty interesting workarounds. It also provided the opportunity to push the limits of CSS3 animation and transitions.
+
+This content is best viewed on an iPad (in landscape orientation, as that was the only format supported by the app), but it will also function in Chrome and Safari. Because the final platform was restricted to iOS there is a lot of Webkit-specific code used and will _completely_ break in Firefox/IE/older Opera/etc.
+
+The project can be viewed at <a href="http://prayingmadness.com/Bijenkorf-December/">prayingmadness.com/Bijenkorf-December/</a>. (Note: swiping left and right will switch "scenes." Feel free to tap/click around and try to find all the hidden tricks!)
+
 #Bijenkorf December app content
 
 This site is built using the <a href="http://yeoman.io">Yeoman</a> build system. All files in the repo are the _development_ files (unminified, unconcatenated, etc.), the production-ready files are generated in a .gitignore'd /dist directory when the build script is run.
